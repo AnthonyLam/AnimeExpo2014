@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\classes-144a3ae00f8dd8877768bdafc3cea99f326148be.jar"
+        jar="C:\Users\Anthony\Desktop\AnimeExpo2014\build\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\support-v4-19.1.0-c3ae395e19a332ac172d1e6fab7ce27ca2dad024.jar"
+        jar="C:\Users\Anthony\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\classes-545474ec93ba443e2b1da81f5b7a07a3b6f17918.jar"
+        jar="C:\Users\Anthony\Desktop\AnimeExpo2014\build\exploded-aar\com.google.android.gms\play-services\4.4.52\classes.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>
+
+</pre-dex-items>

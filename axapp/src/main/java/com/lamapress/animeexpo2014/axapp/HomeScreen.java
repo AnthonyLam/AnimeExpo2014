@@ -16,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.lamapress.animeexpo2014.axapp.network.NetworkHandler;
 
 
 public class HomeScreen extends ActionBarActivity
@@ -112,6 +115,8 @@ public class HomeScreen extends ActionBarActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        TextView view;
+        NetworkHandler handler = new NetworkHandler();
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -132,6 +137,22 @@ public class HomeScreen extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home_screen, container, false);
+
+
+            view = (TextView)rootView.findViewById(R.id.test_text_view);
+            Button btn = (Button)rootView.findViewById(R.id.test_button);
+            btn.setOnClickListener(
+                    new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            handler.load(getActivity());
+                            view.setText(handler.test);
+                            //view.setText(handler.data.getItem(0));
+                        }
+                    }
+            );
+
+
             return rootView;
         }
 

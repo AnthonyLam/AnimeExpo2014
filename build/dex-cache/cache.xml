@@ -2,6 +2,12 @@
 <pre-dex-items>
 
     <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\ion-1.2.4-5f5a413e38aad817d52189a3ab8a7908f098812c.jar"
+        jar="C:\Users\Anthony\.gradle\caches\modules-2\files-2.1\com.koushikdutta.ion\ion\1.2.4\776baf5cac8eb4145dc0901254122cf956a784e3\ion-1.2.4.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="776baf5cac8eb4145dc0901254122cf956a784e3"/>
+    <item
         dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\classes-144a3ae00f8dd8877768bdafc3cea99f326148be.jar"
         jar="C:\Users\Anthony\Desktop\AnimeExpo2014\build\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
         jumboMode="false"
@@ -19,5 +25,17 @@
         jumboMode="false"
         revision="19.0.3"
         sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>
+    <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\gson-2.2.4-d9285e8b7ddadf928345648a233cdf8b39dc99a3.jar"
+        jar="C:\Users\Anthony\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568"/>
+    <item
+        dex="C:\Users\Anthony\Desktop\AnimeExpo2014\axapp\build\pre-dexed\debug\androidasync-1.2.4-361d73e3cf34f4bb4756ec00cee3eb04bbacc2e1.jar"
+        jar="C:\Users\Anthony\.gradle\caches\modules-2\files-2.1\com.koushikdutta.async\androidasync\1.2.4\8dc7111050ee5f13a54b1206d47fee856159b2aa\androidasync-1.2.4.jar"
+        jumboMode="false"
+        revision="19.0.3"
+        sha1="8dc7111050ee5f13a54b1206d47fee856159b2aa"/>
 
 </pre-dex-items>

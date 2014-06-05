@@ -2,25 +2,30 @@ package com.lamapress.animeexpo2014.axapp.core;
 
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
  * @author Anthony Lam
- * @version 1.0
+ * @version 1.1
  *
  * Convention specific information.
  */
 public class Convention {
 
-    static String s_sConventionName;
-    static String s_sConventionCenter;
+    @SerializedName("convention_name")
+    String s_sConventionName;
+    @SerializedName("convention_center")
+    String s_sConventionCenter;
 
-
+    @SerializedName("convention_day_begin")
     public GregorianCalendar m_ConventionDayBegin;
+    @SerializedName("convention_day_end")
     public GregorianCalendar m_ConventionDayEnd;
+    @SerializedName("convention_latitude")
     double m_dConventionLatitude;
+    @SerializedName("convention_longitude")
     double m_dConventionLongitude;
 
 

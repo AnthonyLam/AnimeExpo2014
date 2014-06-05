@@ -19,6 +19,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.lamapress.animeexpo2014.axapp.core.Convention;
 import com.lamapress.animeexpo2014.axapp.network.NetworkHandler;
 
 
@@ -141,13 +144,21 @@ public class HomeScreen extends ActionBarActivity
 
             view = (TextView)rootView.findViewById(R.id.test_text_view);
             Button btn = (Button)rootView.findViewById(R.id.test_button);
+
+            Convention con = new Convention("Anime Expo","LACC",102.2,102.1);
+            con.setConventionDay(2014,7,2,6);
+            GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting().serializeNulls();
+            Gson gson = builder.create();
+            final String g = gson.toJson(con);
+
             btn.setOnClickListener(
                     new View.OnClickListener(){
                         @Override
                         public void onClick(View v){
-                            handler.load(getActivity());
-                            view.setText(handler.test);
-                            //view.setText(handler.data.getItem(0));
+                            //handler.load(getActivity());
+                            //view.setText(handler.test);
+                            view.setText(g);
                         }
                     }
             );

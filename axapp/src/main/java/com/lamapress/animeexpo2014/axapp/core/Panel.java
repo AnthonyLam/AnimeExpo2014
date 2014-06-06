@@ -1,5 +1,7 @@
 package com.lamapress.animeexpo2014.axapp.core;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.GregorianCalendar;
 
 /**
@@ -8,10 +10,14 @@ import java.util.GregorianCalendar;
  */
 public class Panel {
 
+    @SerializedName("description")
     String m_sPanelDescription;
+    @SerializedName("type")
     String m_sPanelType;
+    @SerializedName("room")
     String m_sPanelRoom;
-    GregorianCalendar m_PanelTime;
+    @SerializedName("date")
+    public GregorianCalendar m_PanelTime;
 
     public Panel(){
 
@@ -25,5 +31,21 @@ public class Panel {
 
     public void setPanelDay(int year,int month,int day,int hour,int minute){
        m_PanelTime = new GregorianCalendar(year,month,day,hour,minute);
+    }
+
+    /*
+     * Get methods
+     *
+     */
+    public String getPanelDescription(){
+        return m_sPanelDescription;
+    }
+
+    public String getPanelType() {
+        return m_sPanelType;
+    }
+
+    public String getPanelRoom() {
+        return m_sPanelRoom;
     }
 }

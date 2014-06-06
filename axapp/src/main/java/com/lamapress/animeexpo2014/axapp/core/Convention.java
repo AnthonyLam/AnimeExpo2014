@@ -14,18 +14,18 @@ import java.util.GregorianCalendar;
  */
 public class Convention {
 
-    @SerializedName("convention_name")
+    @SerializedName("name")
     String s_sConventionName;
-    @SerializedName("convention_center")
+    @SerializedName("center")
     String s_sConventionCenter;
 
-    @SerializedName("convention_day_begin")
+    @SerializedName("daybegin")
     public GregorianCalendar m_ConventionDayBegin;
-    @SerializedName("convention_day_end")
+    @SerializedName("dayend")
     public GregorianCalendar m_ConventionDayEnd;
-    @SerializedName("convention_latitude")
+    @SerializedName("latitude")
     double m_dConventionLatitude;
-    @SerializedName("convention_longitude")
+    @SerializedName("longitude")
     double m_dConventionLongitude;
 
 

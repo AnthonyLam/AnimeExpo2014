@@ -2,6 +2,9 @@ package com.lamapress.animeexpo2014.axapp.core;
 
 import android.graphics.Bitmap;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -11,15 +14,19 @@ import java.net.URL;
 public class Guest {
 
     // List of possible guest types
-    enum GuestType {
+    public enum GuestType {
         PEOPLE,
         GROUP,
         COMPANY
     }
 
+    @SerializedName("about")
     String m_sAbout;
-    URL m_websiteURL;
-    URL m_wikiURL;
+    @SerializedName("website-url")
+    String m_websiteURL;
+    @SerializedName("wiki-url")
+    String m_wikiURL;
+    @SerializedName("image-url")
     String m_sImageBitmap;
     GuestType type;
 
@@ -30,7 +37,7 @@ public class Guest {
      * @param bitmap  Bitmap name for a previously downloaded image
      * @param type    PEOPLE,GROUP or COMPANY
      */
-    public Guest(URL website,URL wiki,String bitmap,GuestType type){
+    public Guest(String website,String wiki,String bitmap,GuestType type){
         this.m_websiteURL = website;
         this.m_wikiURL = wiki;
         this.m_sImageBitmap = bitmap;
@@ -50,6 +57,45 @@ public class Guest {
      */
     public void setAbout(String about){
         this.m_sAbout = about;
+    }
+
+    public String getM_sAbout() {
+        return m_sAbout;
+    }
+
+    public void setM_sAbout(String m_sAbout) {
+        this.m_sAbout = m_sAbout;
+    }
+
+    public URL getwebsiteURL() {
+        URL url;
+        try {
+            url = new URL(m_websiteURL);
+            return url;
+        }
+        catch(MalformedURLException e){
+            return null;
+        }
+    }
+
+    public URL getwikiURL() {
+        URL url;
+        try{
+            url = new URL(m_wikiURL);
+            return url;
+        }
+        catch(MalformedURLException e){
+            return null;
+        }
+    }
+
+
+    public String getM_sImageBitmap() {
+        return m_sImageBitmap;
+    }
+
+    public void setM_sImageBitmap(String m_sImageBitmap) {
+        this.m_sImageBitmap = m_sImageBitmap;
     }
 
 }

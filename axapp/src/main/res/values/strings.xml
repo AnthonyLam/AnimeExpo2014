@@ -10,4 +10,17 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <string name="deployd_server_ip">http://162.243.153.109</string>
+    <string name="deployd_server_port">5000</string>
+
+    <!--
+        Object type to JSON name conversions
+    -->
+    <string name="Convention">convention-collection</string>
+    <string name="Event">event-collection</string>
+    <string name="Guest">guest-collection</string>
+    <string name="Panel">panel-collection</string>
+    <string name="Room">room-collection</string>
+
+
 </resources>

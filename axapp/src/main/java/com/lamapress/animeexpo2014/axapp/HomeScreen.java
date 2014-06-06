@@ -22,7 +22,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lamapress.animeexpo2014.axapp.core.Convention;
+import com.lamapress.animeexpo2014.axapp.core.Event;
+import com.lamapress.animeexpo2014.axapp.core.Guest;
+import com.lamapress.animeexpo2014.axapp.core.Panel;
 import com.lamapress.animeexpo2014.axapp.network.NetworkHandler;
+
+import java.net.URL;
 
 
 public class HomeScreen extends ActionBarActivity
@@ -120,6 +125,7 @@ public class HomeScreen extends ActionBarActivity
         private static final String ARG_SECTION_NUMBER = "section_number";
         TextView view;
         NetworkHandler handler = new NetworkHandler();
+        Guest guest;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -145,12 +151,7 @@ public class HomeScreen extends ActionBarActivity
             view = (TextView)rootView.findViewById(R.id.test_text_view);
             Button btn = (Button)rootView.findViewById(R.id.test_button);
 
-            Convention con = new Convention("Anime Expo","LACC",102.2,102.1);
-            con.setConventionDay(2014,7,2,6);
-            GsonBuilder builder = new GsonBuilder();
-            builder.setPrettyPrinting().serializeNulls();
-            Gson gson = builder.create();
-            final String g = gson.toJson(con);
+            guest = new Guest("google.com","wikipedia.org","funny.jpg", Guest.GuestType.PEOPLE);
 
             btn.setOnClickListener(
                     new View.OnClickListener(){
@@ -158,7 +159,8 @@ public class HomeScreen extends ActionBarActivity
                         public void onClick(View v){
                             //handler.load(getActivity());
                             //view.setText(handler.test);
-                            view.setText(g);
+                            view.setText(handler.convertToJson(guest));
+
                         }
                     }
             );

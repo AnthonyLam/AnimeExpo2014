@@ -1,6 +1,7 @@
 package com.lamapress.animeexpo2014.axapp.core;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author Anthony Lam
@@ -8,9 +9,13 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class Room {
 
+    @SerializedName("room")
     String m_sRoomName;
+    @SerializedName("description")
     String m_sRoomDescription;
+    @SerializedName("longitude")
     double m_dRoomLongitude;
+    @SerializedName("latitude")
     double m_dRoomLatitude;
 
     public Room(String name,String description,double latitude,double longitude){

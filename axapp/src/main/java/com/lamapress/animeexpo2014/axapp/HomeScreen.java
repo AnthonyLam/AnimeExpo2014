@@ -25,6 +25,7 @@ import com.lamapress.animeexpo2014.axapp.core.Convention;
 import com.lamapress.animeexpo2014.axapp.core.Event;
 import com.lamapress.animeexpo2014.axapp.core.Guest;
 import com.lamapress.animeexpo2014.axapp.core.Panel;
+import com.lamapress.animeexpo2014.axapp.core.Room;
 import com.lamapress.animeexpo2014.axapp.network.NetworkHandler;
 
 import java.net.URL;
@@ -125,7 +126,7 @@ public class HomeScreen extends ActionBarActivity
         private static final String ARG_SECTION_NUMBER = "section_number";
         TextView view;
         NetworkHandler handler = new NetworkHandler();
-        Guest guest;
+        Room room;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -151,7 +152,7 @@ public class HomeScreen extends ActionBarActivity
             view = (TextView)rootView.findViewById(R.id.test_text_view);
             Button btn = (Button)rootView.findViewById(R.id.test_button);
 
-            guest = new Guest("google.com","wikipedia.org","funny.jpg", Guest.GuestType.PEOPLE);
+            room = new Room("Entertainment Hall","A hall for entertainment",102.2,176.5);
 
             btn.setOnClickListener(
                     new View.OnClickListener(){
@@ -159,7 +160,7 @@ public class HomeScreen extends ActionBarActivity
                         public void onClick(View v){
                             //handler.load(getActivity());
                             //view.setText(handler.test);
-                            view.setText(handler.convertToJson(guest));
+                            view.setText(handler.convertToJson(room));
 
                         }
                     }

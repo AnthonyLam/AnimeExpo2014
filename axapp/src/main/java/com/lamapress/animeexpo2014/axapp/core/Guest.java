@@ -22,11 +22,11 @@ public class Guest {
 
     @SerializedName("about")
     String m_sAbout;
-    @SerializedName("website-url")
+    @SerializedName("websiteurl")
     String m_websiteURL;
-    @SerializedName("wiki-url")
+    @SerializedName("wikiurl")
     String m_wikiURL;
-    @SerializedName("image-url")
+    @SerializedName("imageurl")
     String m_sImageBitmap;
     GuestType type;
 

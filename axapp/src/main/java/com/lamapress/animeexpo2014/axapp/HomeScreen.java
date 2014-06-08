@@ -5,30 +5,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.lamapress.animeexpo2014.axapp.core.Convention;
-import com.lamapress.animeexpo2014.axapp.core.Event;
-import com.lamapress.animeexpo2014.axapp.core.Guest;
-import com.lamapress.animeexpo2014.axapp.core.Panel;
 import com.lamapress.animeexpo2014.axapp.core.Room;
-import com.lamapress.animeexpo2014.axapp.network.NetworkHandler;
+import com.lamapress.animeexpo2014.axapp.network.JsonHandler;
 
-import java.net.URL;
 
 
 public class HomeScreen extends ActionBarActivity
@@ -125,7 +114,7 @@ public class HomeScreen extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         TextView view;
-        NetworkHandler handler = new NetworkHandler();
+        JsonHandler handler = new JsonHandler();
         Room room;
 
         /**
@@ -160,7 +149,9 @@ public class HomeScreen extends ActionBarActivity
                         public void onClick(View v){
                             //handler.load(getActivity());
                             //view.setText(handler.test);
-                            view.setText(handler.convertToJson(room));
+                            String json = handler.convertToJson(room);
+                            room = handler.convertFromJson(json,Room.class);
+                            view.setText(room.getRoomDescription());
 
                         }
                     }

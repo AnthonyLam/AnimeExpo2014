@@ -29,4 +29,26 @@ public class Room {
         LatLng location = new LatLng(m_dRoomLatitude,m_dRoomLongitude);
         return location;
     }
+
+
+    public String getRoomName(){
+        return m_sRoomName;
+    }
+
+    public String getRoomDescription() {
+        return m_sRoomDescription;
+    }
+
+
+    public double getRoomLongitude() {
+        return m_dRoomLongitude;
+    }
+
+    public double getRoomLatitude() {
+        return m_dRoomLatitude;
+    }
+
+    public void setRoomLatitude(double m_dRoomLatitude) {
+        this.m_dRoomLatitude = m_dRoomLatitude;
+    }
 }

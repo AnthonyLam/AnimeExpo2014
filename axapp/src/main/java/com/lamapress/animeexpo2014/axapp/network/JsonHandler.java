@@ -1,23 +1,19 @@
 package com.lamapress.animeexpo2014.axapp.network;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.lamapress.animeexpo2014.axapp.R;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Objects;
 
 /**
- * Created by Anthony on 6/4/2014.
+ * @author Anthony Lam
  */
 public class JsonHandler{
 
@@ -30,8 +26,8 @@ public class JsonHandler{
 
     /**
      *
-     * @param context
-     * @param jsonFile
+     * @param context Activity context
+     * @param jsonFile Name of remote JSON Object/File
      */
     public JsonArray load(final Context context,String jsonFile){
         Ion.with(context)
@@ -53,7 +49,7 @@ public class JsonHandler{
 
     /**
      *
-     * @param object
+     * @param object Any object to convert to JSON
      * @return String representing JSON formatted object
      */
     public <E>String convertToJson(E object){

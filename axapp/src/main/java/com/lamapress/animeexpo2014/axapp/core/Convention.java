@@ -15,9 +15,9 @@ import java.util.GregorianCalendar;
 public class Convention {
 
     @SerializedName("name")
-    String s_sConventionName;
+    public final String m_sConventionName;
     @SerializedName("center")
-    String s_sConventionCenter;
+    public final String m_sConventionCenter;
 
     @SerializedName("daybegin")
     public GregorianCalendar m_ConventionDayBegin;
@@ -36,8 +36,8 @@ public class Convention {
      * @param longitude         Longitude position of convention center
      */
     public Convention(String conventionName,String conventionCenter,double latitude,double longitude){
-        s_sConventionName = conventionName;
-        s_sConventionCenter = conventionCenter;
+        m_sConventionName = conventionName;
+        m_sConventionCenter = conventionCenter;
         this.m_dConventionLatitude = latitude;
         this.m_dConventionLongitude = longitude;
     }

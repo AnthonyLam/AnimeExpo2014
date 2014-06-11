@@ -1,6 +1,8 @@
 package com.lamapress.animeexpo2014.axapp.network;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,18 +31,24 @@ public class JsonHandler{
      * @param context Activity context
      * @param jsonFile Name of remote JSON Object/File
      */
-    public JsonArray load(final Context context,String jsonFile){
+    public JsonArray load(final Context context,String jsonFile,ProgressBar bar){
+        Log.v("DEBUGGING",R.string.deployd_server_ip + ":" + R.string.deployd_server_port + "/" + jsonFile);
         Ion.with(context)
             //Load from "WEBSITE:PORT/JSONDATA"
-            .load(R.string.deployd_server_ip + ":" + R.string.deployd_server_port + "/" + jsonFile)
+            .load(context.getString(R.string.deployd_server_ip) + ":" +
+                    context.getString(R.string.deployd_server_port) + "/" +
+                    jsonFile)
+            .progressBar(bar)
+            .setLogging("DEBUGGING",Log.DEBUG)
             .asJsonArray()
             .setCallback(new FutureCallback<JsonArray>() {
                 @Override
                 public void onCompleted(Exception e, JsonArray result) {
                     if (e != null) {
-                        test = e.getMessage();
-                        Toast.makeText(context,"Error loading forom server",Toast.LENGTH_LONG);
+                        test = e.toString();
+                        Log.v("DEBUGGING",test);
                     }
+                    Log.d("DEBUGGING","Download complete");
                     array = result;
                 }
             });

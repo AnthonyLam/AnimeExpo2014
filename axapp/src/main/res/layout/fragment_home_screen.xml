@@ -26,4 +26,18 @@
         android:text="TEST"
         android:layout_below="@id/test_text_view"/>
 
+    <Button
+        android:id="@+id/show_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        android:layout_below="@id/test_button"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/show_button"/>
+
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.JsonArray;
+import com.lamapress.animeexpo2014.axapp.core.Convention;
+import com.lamapress.animeexpo2014.axapp.core.ConventionSQL;
 import com.lamapress.animeexpo2014.axapp.core.Room;
 import com.lamapress.animeexpo2014.axapp.network.JsonHandler;
 
@@ -115,7 +121,8 @@ public class HomeScreen extends ActionBarActivity
         private static final String ARG_SECTION_NUMBER = "section_number";
         TextView view;
         JsonHandler handler = new JsonHandler();
-        Room room;
+        JsonArray array = null;
+        ProgressBar bar;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -140,8 +147,8 @@ public class HomeScreen extends ActionBarActivity
 
             view = (TextView)rootView.findViewById(R.id.test_text_view);
             Button btn = (Button)rootView.findViewById(R.id.test_button);
-
-            room = new Room("Entertainment Hall","A hall for entertainment",102.2,176.5);
+            Button show = (Button)rootView.findViewById(R.id.show_button);
+            bar = (ProgressBar)rootView.findViewById(R.id.progress);
 
             btn.setOnClickListener(
                     new View.OnClickListener(){
@@ -149,13 +156,29 @@ public class HomeScreen extends ActionBarActivity
                         public void onClick(View v){
                             //handler.load(getActivity());
                             //view.setText(handler.test);
-                            String json = handler.convertToJson(room);
-                            room = handler.convertFromJson(json,Room.class);
-                            view.setText(room.getRoomDescription());
-
+                            if(array == null) {
+                                array = handler.load(getActivity(), getString(R.string.Convention) , bar);
+                            }
+                            else{
+                                Log.d("DEBUGGING", "Array value set");
+                                Convention con = handler.convertFromJson(array.get(0).getAsJsonObject().toString(),
+                                        Convention.class);
+                                ConventionSQL sql = new ConventionSQL();
+                                sql.saveConvention(getActivity(),con);
+                            }
                         }
                     }
             );
+
+            show.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    ConventionSQL sql = new ConventionSQL();
+                    Convention con =  sql.getConvention(getActivity()).get(0);
+                    view.setText(con.m_sConventionName);
+                }
+            });
+
 
 
             return rootView;

@@ -20,9 +20,9 @@ public class Convention {
     public final String m_sConventionCenter;
 
     @SerializedName("daybegin")
-    public GregorianCalendar m_ConventionDayBegin;
+    public GregorianCalendar m_ConventionDayBegin = new GregorianCalendar();
     @SerializedName("dayend")
-    public GregorianCalendar m_ConventionDayEnd;
+    public GregorianCalendar m_ConventionDayEnd = new GregorianCalendar();
     @SerializedName("latitude")
     double m_dConventionLatitude;
     @SerializedName("longitude")

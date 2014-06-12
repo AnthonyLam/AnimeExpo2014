@@ -3,6 +3,7 @@ package com.lamapress.animeexpo2014.axapp.core;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.lamapress.animeexpo2014.axapp.network.SQLHelper;
 
@@ -24,8 +25,8 @@ public class ConventionSQL {
     public static final String COL_LATITUDE = "latitude";
     public static final String COL_LONGITUDE = "longitude";
 
-    public static final String TEXT = "text not null, ";
-    public static final String INTEGER = "integer not null";
+    public static final String TEXT = " text, ";
+    public static final String INTEGER = " integer, ";
 
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
@@ -36,11 +37,12 @@ public class ConventionSQL {
                     COL_DAYBEGIN + INTEGER +
                     COL_DAYEND + INTEGER +
                     COL_LATITUDE + TEXT +
-                    COL_LONGITUDE + " text not null);";
+                    COL_LONGITUDE + " text);";
 
 
     public void saveConvention(Context context,Convention convention){
         SQLHelper helper = SQLHelper.getInstance(context,DATABASE_NAME,TABLE_CREATE,DATABASE_TABLE,DATABASE_VERSION);
+        helper.dropDB(helper.getWritableDatabase());
 
         if(helper != null){
             ContentValues values = new ContentValues();
@@ -51,7 +53,10 @@ public class ConventionSQL {
             values.put(COL_LATITUDE,convention.m_dConventionLatitude);
             values.put(COL_LONGITUDE,convention.m_dConventionLongitude);
             helper.insert(DATABASE_TABLE, values);
+            Log.v("FYI","Values inserted into db");
         }
+
+        helper.close();
     }
 
     public ArrayList<Convention> getConvention(Context context){
@@ -81,14 +86,15 @@ public class ConventionSQL {
                                 cursor.getDouble(columnId.get(5)), // COL_LATITUDE
                                 cursor.getDouble(columnId.get(6))  // COL_LONGITUDE
                         );
-                        c.m_ConventionDayBegin.setTimeInMillis(columnId.get(3)); // COL_DAYBEGIN
-                        c.m_ConventionDayEnd.setTimeInMillis(columnId.get(4));   // COL_DAYEND
+                        c.m_ConventionDayBegin.setTimeInMillis(cursor.getLong(columnId.get(3))); // COL_DAYBEGIN
+                        c.m_ConventionDayEnd.setTimeInMillis(cursor.getLong(columnId.get(4)));   // COL_DAYEND
 
                         conventionList.add(c);
                         cursor.moveToNext();
                     }
                 }
             }
+        helper.close();
         return conventionList;
         }
 }

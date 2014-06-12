@@ -39,6 +39,7 @@ public class SQLHelper extends SQLiteOpenHelper{
         if(instance == null){
             instance = new SQLHelper(context,dbName,sql,tableName,ver);
             try{
+                Log.v("FYI","Database " + s_dbName + " opened");
                 db = instance.getWritableDatabase();
             }
             catch(SQLiteException e){
@@ -58,15 +59,26 @@ public class SQLHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
+            Log.v("FYI","Creating database table [ " + s_sqlQuery + " ]");
             db.execSQL(s_sqlQuery);
         }
         catch(SQLiteException e){
-
+            Log.e("FYI","Could not create the database according to the SQL statement [ " + s_sqlQuery + " ]");
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
+        try{
+            db.execSQL("DROP TABLE IF EXISTS " + s_tableName);
+        }
+        catch(SQLiteException e){
+
+        }
+        onCreate(db);
+    }
+
+    public void dropDB(SQLiteDatabase db){
         try{
             db.execSQL("DROP TABLE IF EXISTS " + s_tableName);
         }

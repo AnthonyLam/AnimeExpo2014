@@ -160,10 +160,10 @@ public class HomeScreen extends ActionBarActivity
                                 array = handler.load(getActivity(), getString(R.string.Convention) , bar);
                             }
                             else{
-                                Log.d("DEBUGGING", "Array value set");
                                 Convention con = handler.convertFromJson(array.get(0).getAsJsonObject().toString(),
                                         Convention.class);
                                 ConventionSQL sql = new ConventionSQL();
+                                Log.v("FYI","Inserting "+ con.m_sConventionName + " convention");
                                 sql.saveConvention(getActivity(),con);
                             }
                         }

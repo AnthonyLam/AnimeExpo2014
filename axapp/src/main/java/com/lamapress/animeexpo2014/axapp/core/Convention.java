@@ -3,31 +3,50 @@ package com.lamapress.animeexpo2014.axapp.core;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.http.GET;
+import retrofit.http.Path;
 
 /**
  * @author Anthony Lam
- * @version 1.1
+ * @version 1.2
  *
  * Convention specific information.
  */
+@DatabaseTable(tableName = "convention")
 public class Convention {
 
+    @DatabaseField(id = true)
     @SerializedName("name")
-    public final String m_sConventionName;
+    public String m_sConventionName = "";
+    @DatabaseField
     @SerializedName("center")
-    public final String m_sConventionCenter;
+    public String m_sConventionCenter = "";
 
+    @DatabaseField
     @SerializedName("daybegin")
-    public GregorianCalendar m_ConventionDayBegin = new GregorianCalendar();
+    public long m_ConventionDayBegin;
+    @DatabaseField
     @SerializedName("dayend")
-    public GregorianCalendar m_ConventionDayEnd = new GregorianCalendar();
+    public long m_ConventionDayEnd;
+    @DatabaseField
     @SerializedName("latitude")
-    double m_dConventionLatitude;
+    public double m_dConventionLatitude;
+    @DatabaseField
     @SerializedName("longitude")
-    double m_dConventionLongitude;
+    public double m_dConventionLongitude;
 
+    /**
+     * Required public constructor for ORMLite
+     */
+    public Convention(){}
 
     /**
      * @param conventionName    Name of specific convention
@@ -59,8 +78,14 @@ public class Convention {
      * @param dayEnd
      */
     public void setConventionDay(int year,int month,int dayBegin,int dayEnd){
-        m_ConventionDayBegin = new GregorianCalendar(year,month,dayBegin);
-        m_ConventionDayEnd = new GregorianCalendar(year,month,dayEnd);
+        GregorianCalendar begin = new GregorianCalendar(year,month,dayBegin);
+        GregorianCalendar end = new GregorianCalendar(year,month,dayEnd);
+        m_ConventionDayBegin = (begin.getTimeInMillis());
+        m_ConventionDayEnd = (end.getTimeInMillis());
     }
 
+    public interface ConventionService{
+        @GET("/convention-collection")
+        void listItems( Callback<List<Convention>> cb);
+    }
 }

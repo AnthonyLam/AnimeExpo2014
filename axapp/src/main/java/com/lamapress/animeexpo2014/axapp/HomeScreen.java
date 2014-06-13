@@ -14,15 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.cengalabs.flatui.FlatUI;
+import com.cengalabs.flatui.views.FlatButton;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import com.lamapress.animeexpo2014.axapp.core.Convention;
 import com.lamapress.animeexpo2014.axapp.sqlite_helper.DatabaseHelper;
 
@@ -160,12 +157,15 @@ public class HomeScreen extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            FlatUI.initDefaultValues(getActivity());
+            FlatUI.setDefaultTheme(FlatUI.BLOOD);
+
             View rootView = inflater.inflate(R.layout.fragment_home_screen, container, false);
 
 
             view = (TextView)rootView.findViewById(R.id.test_text_view);
-            Button btn = (Button)rootView.findViewById(R.id.test_button);
-            Button show = (Button)rootView.findViewById(R.id.show_button);
+            FlatButton btn = (FlatButton)rootView.findViewById(R.id.test_button);
+            FlatButton show = (FlatButton)rootView.findViewById(R.id.show_button);
 
             btn.setOnClickListener(
                     new View.OnClickListener(){

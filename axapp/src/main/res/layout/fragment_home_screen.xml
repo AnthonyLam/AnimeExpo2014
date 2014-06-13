@@ -1,12 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".HomeScreen$PlaceholderFragment">
+    android:orientation="vertical"
+    tools:context=".HomeScreen$PlaceholderFragment"
+    >
 
     <TextView
         android:id="@+id/section_label"
@@ -19,25 +22,22 @@
         android:layout_height="wrap_content"
         android:text="Data goes here"
         />
-    <Button
+    <com.cengalabs.flatui.views.FlatButton
         android:id="@+id/test_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="TEST"
-        android:layout_below="@id/test_text_view"/>
+        />
 
-    <Button
+    <com.cengalabs.flatui.views.FlatButton
         android:id="@+id/show_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Load"
-        android:layout_below="@id/test_button"
+        android:layout_margin="8dp"
+        flatui:blockButtonEffectHeight="3dp"
         />
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/show_button"/>
 
-</RelativeLayout>
+</LinearLayout>

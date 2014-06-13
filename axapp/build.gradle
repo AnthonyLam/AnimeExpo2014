@@ -27,9 +27,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.0.1'
     compile 'com.android.support:appcompat-v7:19.+'
 
-   compile 'com.google.android.gms:play-services:4.4.52'
-   compile 'se.emilsjolander:stickylistheaders:2.4.0'
-   compile 'com.squareup.retrofit:retrofit:1.6.0'
-   compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.google.android.gms:play-services:4.4.52'
+    compile 'se.emilsjolander:stickylistheaders:2.4.0'
+    compile 'com.squareup.retrofit:retrofit:1.6.0'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.thelamacmdr:flatui:2.0.2'
 }
 

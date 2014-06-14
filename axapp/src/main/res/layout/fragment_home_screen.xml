@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:text="Load"
         android:layout_margin="8dp"
-        flatui:blockButtonEffectHeight="3dp"
         />
 
 

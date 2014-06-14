@@ -6,6 +6,10 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.http.GET;
 
 /**
  * @author Anthony Lam
@@ -17,6 +21,10 @@ public class Panel {
     @DatabaseField(id=true,useGetSet = true)
     @SerializedName("name")
     String m_sPanelName;
+
+    @DatabaseField
+    @SerializedName("date")
+    public long m_PanelTime;
 
     @DatabaseField(useGetSet = true)
     @SerializedName("description")
@@ -30,9 +38,6 @@ public class Panel {
     @SerializedName("room")
     String m_sPanelRoom;
 
-    @DatabaseField
-    @SerializedName("date")
-    public Date m_PanelTime;
 
     public Panel(){}
 
@@ -45,8 +50,13 @@ public class Panel {
 
     public void setPanelDay(int year,int month,int day,int hour,int minute){
         GregorianCalendar cal = new GregorianCalendar(year,month,day,hour,minute);
-        m_PanelTime = new Date();
-        m_PanelTime.setTime(cal.getTimeInMillis());
+        m_PanelTime = (cal.getTimeInMillis());
+    }
+
+
+    public interface PanelService{
+        @GET("/panel-collection")
+        void listItems(Callback<List<Panel>> cb);
     }
 
     /*

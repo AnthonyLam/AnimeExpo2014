@@ -22,6 +22,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.lamapress.animeexpo2014.axapp.core.Convention;
 import com.lamapress.animeexpo2014.axapp.sqlite_helper.DatabaseHelper;
+import com.lamapress.animeexpo2014.axapp.ui.PanelFragment;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -65,7 +66,7 @@ public class HomeScreen extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PanelFragment.newInstance(position + 1))
                 .commit();
     }
 
@@ -120,119 +121,6 @@ public class HomeScreen extends ActionBarActivity
      * A placeholder fragment containing a simple view.
      *
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        TextView view;
-        Convention con;
-        private DatabaseHelper dbHelper = null;
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public void onDestroy(){
-            super.onDestroy();
-            if(dbHelper != null){
-                OpenHelperManager.releaseHelper();
-                dbHelper = null;
-            }
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            FlatUI.initDefaultValues(getActivity());
-            FlatUI.setDefaultTheme(FlatUI.BLOOD);
-
-            View rootView = inflater.inflate(R.layout.fragment_home_screen, container, false);
-
-
-            view = (TextView)rootView.findViewById(R.id.test_text_view);
-            FlatButton btn = (FlatButton)rootView.findViewById(R.id.test_button);
-            FlatButton show = (FlatButton)rootView.findViewById(R.id.show_button);
-
-            btn.setOnClickListener(
-                    new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v){
-                            try{
-                                Dao<Convention,String> conDao = getHelper().getConventionDao();
-                                con = conDao.queryForAll().get(0);
-                                view.setText(con.m_sConventionCenter);
-                            }
-                            catch(SQLException e){
-
-                            }
-                        }
-                    }
-            );
-
-            show.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    RestAdapter rest = new RestAdapter.Builder()
-                            .setEndpoint(getString(R.string.deployd_server_ip) + ":" +
-                                         getString(R.string.deployd_server_port))
-                            .build();
-
-                    Convention.ConventionService conService = rest.create(Convention.ConventionService
-                            .class);
-                    conService.listItems(
-                            new Callback<List<Convention>>() {
-                                public void failure(RetrofitError e) {
-                                    Log.v("FYI", "Callback failed " + e.toString() + " @URL " + e.getUrl());
-                                }
-
-                                public void success(List<Convention> con, Response response) {
-                                    Log.v("FYI", "Callback success with response: " + con.toString());
-                                    try {
-                                        Dao<Convention, String> conDao = getHelper().getConventionDao();
-                                        view.setText(con.get(0).m_sConventionName);
-                                        conDao.create(con.get(0));
-                                    } catch (SQLException e) {
-
-                                    }
-
-                                }
-                            }
-                    );
-                }
-            });
-
-
-
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeScreen) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-
-        private DatabaseHelper getHelper(){
-            if(dbHelper == null){
-                dbHelper = OpenHelperManager.getHelper(getActivity(),DatabaseHelper.class);
-            }
-            return dbHelper;
-        }
-    }
 
 }

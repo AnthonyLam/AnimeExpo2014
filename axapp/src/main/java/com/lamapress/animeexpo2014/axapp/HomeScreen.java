@@ -1,36 +1,16 @@
 package com.lamapress.animeexpo2014.axapp;
 
-import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.cengalabs.flatui.FlatUI;
-import com.cengalabs.flatui.views.FlatButton;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.lamapress.animeexpo2014.axapp.core.Convention;
-import com.lamapress.animeexpo2014.axapp.sqlite_helper.DatabaseHelper;
+import com.lamapress.animeexpo2014.axapp.ui.HomeFragment;
 import com.lamapress.animeexpo2014.axapp.ui.PanelFragment;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class HomeScreen extends ActionBarActivity
@@ -65,8 +45,20 @@ public class HomeScreen extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment;
+
+        switch(position){
+            case 0:{
+                fragment = HomeFragment.newInstance(position + 1);
+                break;
+            }
+            default:{
+                fragment = PanelFragment.newInstance(position+1);
+            }
+        }
+
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PanelFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 

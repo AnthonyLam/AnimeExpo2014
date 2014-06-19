@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.lamapress.animeexpo2014.axapp"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
@@ -32,5 +32,7 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.6.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.thelamacmdr:flatui:2.0.2'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.github.gabrielemariotti.cards:library:1.7.2'
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <integer name="event">42</integer>
-        <integer name="info">43</integer>
-        <integer name="panel">44</integer>
-        <integer name="misc">45</integer>
+        <integer name="section1">42</integer>
+        <integer name="section2">43</integer>
+        <integer name="section3">44</integer>
+        <integer name="section4">45</integer>
 </resources>

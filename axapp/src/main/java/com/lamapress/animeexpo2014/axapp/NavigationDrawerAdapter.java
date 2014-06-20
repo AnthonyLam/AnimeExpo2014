@@ -27,12 +27,13 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
          /*
          * TODO: WARNING: Hardcoded data here
          */
-        m_sMehData.add(new Meta(R.integer.event,"Events"));
-        m_sMehData.add(new Meta(R.integer.event,"More Events"));
-        m_sMehData.add(new Meta(R.integer.panel,"Guest of Honor"));
-        m_sMehData.add(new Meta(R.integer.panel,"Workshop"));
-        m_sMehData.add(new Meta(R.integer.panel,"Panel"));
-        m_sMehData.add(new Meta(R.integer.misc,"Misc"));
+        m_sMehData.add(new Meta(R.integer.section1,"Events"));
+        m_sMehData.add(new Meta(R.integer.section2,"More Events"));
+        m_sMehData.add(new Meta(R.integer.section2,"Guest of Honor"));
+        m_sMehData.add(new Meta(R.integer.section2,"Workshop"));
+        m_sMehData.add(new Meta(R.integer.section2,"Panel"));
+        m_sMehData.add(new Meta(R.integer.section3,"Maps"));
+        m_sMehData.add(new Meta(R.integer.section3,"Misc"));
         inflater = LayoutInflater.from(context);
     }
 
@@ -59,6 +60,8 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.list_item_navigation_drawer,parent,false);
             holder.text = (TextView)convertView.findViewById(R.id.navigation_text);
+
+            holder.image = (ImageView)convertView.findViewById(R.id.navigation_image);
             convertView.setTag(holder);
         }
         else{
@@ -78,6 +81,7 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
             holder = new HeaderViewHolder();
             convertView = inflater.inflate(R.layout.list_item_header,parent,false);
             holder.text = (TextView)convertView.findViewById(R.id.header_text);
+
             convertView.setTag(holder);
         }
         else{
@@ -85,23 +89,9 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
         }
 
         /*
-         * TODO: WARNING: Hardcoded data here
+            Initialize section headers to blanks
          */
-        String headerText = "UhOh";
-        switch(m_sMehData.get(position).typeId){
-            case R.integer.event:
-                headerText = "Event";
-                break;
-            case R.integer.info:
-                headerText = "Info";
-                break;
-            case R.integer.panel:
-                headerText = "Panel";
-                break;
-            case R.integer.misc:
-                headerText = "Misc";
-                break;
-        }
+        String headerText = "";
 
         holder.text.setText(headerText);
         return convertView;
@@ -125,11 +115,11 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
      * TODO: Move to separate core class?
      */
     class Meta{
-        int typeId;
+        long typeId;
         String fragmentType;
 
-        public Meta(int typeId,String fragmentType){
-            this.typeId = typeId;
+        public Meta(long sl,String fragmentType){
+            this.typeId = sl;
             this.fragmentType = fragmentType;
         }
     }

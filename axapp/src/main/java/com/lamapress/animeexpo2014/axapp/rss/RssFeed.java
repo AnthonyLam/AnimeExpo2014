@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.matshofman.saxrssreader;
+package com.lamapress.animeexpo2014.axapp.rss;
 
 import java.util.ArrayList;
 

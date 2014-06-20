@@ -1,8 +1,11 @@
 package com.lamapress.animeexpo2014.axapp.ui;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,15 @@ import android.widget.TextView;
 import com.cengalabs.flatui.FlatUI;
 import com.lamapress.animeexpo2014.axapp.R;
 import com.lamapress.animeexpo2014.axapp.core.News;
+import com.lamapress.animeexpo2014.axapp.rss.RssFeed;
+import com.lamapress.animeexpo2014.axapp.rss.RssItem;
+import com.lamapress.animeexpo2014.axapp.rss.RssReader;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,56 +76,62 @@ public class HomeFragment extends Fragment {
     }
 
     public void initCard(){
-        final ArrayList<News> newsList = new ArrayList<News>();
         final ArrayList<Card> cards = new ArrayList<Card>();
 
-        RestAdapter rest = new RestAdapter.Builder()
-                    .setEndpoint("http://162.243.153.109:5000")
-                    .build();
 
-            News.NewsServices newsServices = rest.create(News.NewsServices.class);
-            newsServices.listItems(
-                    new Callback<List<News>>() {
-                        @Override
-                        public void success(List<News> news, Response response) {
-                            newsList.addAll(news);
+        class RssGrab extends AsyncTask<URL,Void,List<RssItem>>{
 
 
-                            for(int i=0;i< newsList.size();i++){
-                                CardInside card = new CardInside(getActivity());
+            ArrayList<RssItem> item = new ArrayList<RssItem>();
 
-                                CardTitle header = new CardTitle(getActivity(),newsList.get(i));
+            @Override
+            public List<RssItem> doInBackground(URL... urls){
+                try {
+                    RssFeed feed = RssReader.read(urls[0]);
+                    ArrayList<RssItem> rssItems = feed.getRssItems();
+                    return rssItems;
+                }
+                catch(SAXException sax){
+                    return item;
+                }
+                catch(IOException io){
+                    return item;
+                }
+            }
 
-                                //Card title
-                                card.addCardHeader(header);
+            @Override
+            public void onPostExecute(List<RssItem> rssList){
 
-                                //Card body
-                                CardBody body = new CardBody(getActivity(),newsList.get(i));
-                                card.addCardExpand(body);
+                for(int i = 0; i < rssList.size(); i++){
+                    CardInside card = new CardInside(getActivity());
+                    CardTitle header = new CardTitle(getActivity(),rssList.get(i));
 
-                                ViewToClickToExpand viewToClickToExpand =
-                                        ViewToClickToExpand.builder()
-                                        .highlightView(false)
-                                        .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
+                    card.addCardHeader(header);
 
-                                card.setViewToClickToExpand(viewToClickToExpand);
+                    CardBody body = new CardBody(getActivity(),rssList.get(i));
+                    card.addCardExpand(body);
 
-                                cards.add(card);
-                            }
+                    ViewToClickToExpand viewToClickToExpand =
+                            ViewToClickToExpand.builder()
+                            .highlightView(false)
+                            .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
 
-                            CardArrayAdapter m_CardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
-                            CardListView listView = (CardListView)getActivity().findViewById(R.id.cards_newslist);
+                    card.setViewToClickToExpand(viewToClickToExpand);
+                    cards.add(card);
+                }
 
-                            listView.setAdapter(m_CardArrayAdapter);
-                        }
-                        @Override
-                        public void failure(RetrofitError error){
-                            Log.v("FYI","News grab failed");
-                        }
-                    }
-            );
+                CardArrayAdapter m_CardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
+                CardListView listView = (CardListView)getActivity().findViewById(R.id.cards_newslist);
+                listView.setAdapter(m_CardArrayAdapter);
+            }
+        }
 
-
+        try {
+            URL url = new URL("http://www.anime-expo.org/feed/");
+            new RssGrab().execute(url);
+        }
+        catch(MalformedURLException me){
+        }
     }
 
     public class CardInside extends Card{
@@ -123,42 +140,37 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    class CardTitle extends CardHeader{
-        News news;
-        public CardTitle(Context context,News news){
-            super(context,R.layout.card_news_header);
-            this.news = news;
+    class CardBody extends CardExpand{
+        RssItem item;
+        public CardBody(Context context,RssItem item){
+            super(context,R.layout.card_news_inner);
+            this.item = item;
         }
 
         @Override
         public void setupInnerViewElements(ViewGroup vg, View v){
-            TextView text = (TextView)v.findViewById(R.id.text_card_news_header);
+            TextView text = (TextView)v.findViewById(R.id.text_card_news_body);
 
-            if(news!= null){
-                text.setText(news.getM_sNewsTitle().toUpperCase());
+            if(item!= null){
+                text.setText(item.getPubDate() + " - " +Html.fromHtml(item.getDescription()));
             }
         }
     }
 
 
-    class CardBody extends CardExpand{
-        News news;
+    class CardTitle extends CardHeader{
+        RssItem rssItem;
 
-        public CardBody(Context context,News news){
-            super(context,R.layout.card_news_inner);
-            this.news = news;
+        public CardTitle(Context context,RssItem rssItem){
+            super(context,R.layout.card_news_header);
+            this.rssItem = rssItem;
         }
 
         @Override
         public void setupInnerViewElements(ViewGroup parent,View view) {
-            TextView text = (TextView) view.findViewById(R.id.text_card_news_body);
+            TextView text = (TextView) view.findViewById(R.id.text_card_news_header);
+            text.setText(rssItem.getTitle());
 
-            if(news != null){
-                text.setText(news.getM_sNewsDescription() + "\n\n" +
-                        news.convertTime().MONTH + " " +
-                        news.convertTime().DATE + " " +
-                        news.convertTime().YEAR);
-            }
         }
     }
 

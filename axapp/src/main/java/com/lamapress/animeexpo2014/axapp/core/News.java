@@ -2,6 +2,7 @@ package com.lamapress.animeexpo2014.axapp.core;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -19,9 +20,9 @@ public class News {
     String m_sNewsDescription;
 
     @SerializedName("date")
-    int m_sNewsDate;
+    Date m_sNewsDate;
 
-    public News(String title,String description,int date){
+    public News(String title,String description,Date date){
         this.m_sNewsTitle = title;
         this.m_sNewsDescription = description;
         this.m_sNewsDate = date;
@@ -32,11 +33,6 @@ public class News {
         void listItems(Callback<List<News>> news);
     }
 
-    public GregorianCalendar convertTime(){
-        GregorianCalendar cal =new GregorianCalendar();
-        cal.setTimeInMillis(m_sNewsDate);
-        return cal;
-    }
 
     public String getM_sNewsTitle() {
         return m_sNewsTitle;
@@ -54,11 +50,4 @@ public class News {
         this.m_sNewsDescription = m_sNewsDescription;
     }
 
-    public int getM_sNewsDate() {
-        return m_sNewsDate;
-    }
-
-    public void setM_sNewsDate(int m_sNewsDate) {
-        this.m_sNewsDate = m_sNewsDate;
-    }
 }

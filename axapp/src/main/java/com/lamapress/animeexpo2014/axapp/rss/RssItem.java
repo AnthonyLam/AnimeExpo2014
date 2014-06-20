@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package nl.matshofman.saxrssreader;
+
+package com.lamapress.animeexpo2014.axapp.rss;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

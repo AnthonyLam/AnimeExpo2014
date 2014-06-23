@@ -1,12 +1,11 @@
 package com.lamapress.animeexpo2014.axapp.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.cengalabs.flatui.FlatUI;
 import com.lamapress.animeexpo2014.axapp.R;
-import com.lamapress.animeexpo2014.axapp.core.News;
 import com.lamapress.animeexpo2014.axapp.rss.RssFeed;
 import com.lamapress.animeexpo2014.axapp.rss.RssItem;
 import com.lamapress.animeexpo2014.axapp.rss.RssReader;
@@ -33,10 +31,6 @@ import it.gmariotti.cardslib.library.internal.CardExpand;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * @author Anthony Lame
@@ -59,9 +53,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-        FlatUI.initDefaultValues(getActivity());
-        FlatUI.setDefaultTheme(FlatUI.CANDY);
 
         View mainView = inflater.inflate(R.layout.fragment_home_activity,container,false);
 
@@ -104,8 +95,9 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i < rssList.size(); i++){
                     CardInside card = new CardInside(getActivity());
-                    CardTitle header = new CardTitle(getActivity(),rssList.get(i));
+                    CardHeader header = new CardHeader(getActivity(),R.layout.card_news_header);
 
+                    header.setTitle(rssList.get(i).getTitle());
                     card.addCardHeader(header);
 
                     CardBody body = new CardBody(getActivity(),rssList.get(i));
@@ -151,27 +143,12 @@ public class HomeFragment extends Fragment {
         public void setupInnerViewElements(ViewGroup vg, View v){
             TextView text = (TextView)v.findViewById(R.id.text_card_news_body);
 
-            if(item!= null){
-                text.setText(item.getPubDate() + " - " +Html.fromHtml(item.getDescription()));
+            if(item!= null) {
+                text.setText(item.getPubDate() + " - " + Html.fromHtml(item.getDescription()));
             }
         }
     }
 
 
-    class CardTitle extends CardHeader{
-        RssItem rssItem;
-
-        public CardTitle(Context context,RssItem rssItem){
-            super(context,R.layout.card_news_header);
-            this.rssItem = rssItem;
-        }
-
-        @Override
-        public void setupInnerViewElements(ViewGroup parent,View view) {
-            TextView text = (TextView) view.findViewById(R.id.text_card_news_header);
-            text.setText(rssItem.getTitle());
-
-        }
-    }
 
 }

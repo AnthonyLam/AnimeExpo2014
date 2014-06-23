@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/colorBorder"
+        android:background="@drawable/rectangle"
+        android:layout_width="8dp"
+        android:layout_height="@dimen/card_base_empty_height"
+        />
+
+    <TextView
+        android:id="@+id/card_main_inner_simple_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/colorBorder"
+        />
+
+    <TextView
+        android:id="@+id/card_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_main_inner_simple_title"/>
+
+    <TextView
+        android:id="@+id/card_panel_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_time"
+        />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:numStars="1"/>
+
+</RelativeLayout>

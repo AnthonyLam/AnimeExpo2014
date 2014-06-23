@@ -27,13 +27,13 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
          /*
          * TODO: WARNING: Hardcoded data here
          */
-        m_sMehData.add(new Meta(R.integer.section1,"Events"));
-        m_sMehData.add(new Meta(R.integer.section2,"More Events"));
-        m_sMehData.add(new Meta(R.integer.section2,"Guest of Honor"));
-        m_sMehData.add(new Meta(R.integer.section2,"Workshop"));
-        m_sMehData.add(new Meta(R.integer.section2,"Panel"));
-        m_sMehData.add(new Meta(R.integer.section3,"Maps"));
-        m_sMehData.add(new Meta(R.integer.section3,"Misc"));
+        m_sMehData.add(new Meta(R.integer.section1,"Events",R.drawable.ic_panel));
+        m_sMehData.add(new Meta(R.integer.section2,"More Events",R.drawable.ic_panel));
+        m_sMehData.add(new Meta(R.integer.section2,"Guest of Honor",R.drawable.ic_guesthonor));
+        m_sMehData.add(new Meta(R.integer.section2,"Workshop",R.drawable.ic_workshop));
+        m_sMehData.add(new Meta(R.integer.section2,"Panel",R.drawable.ic_panel));
+        m_sMehData.add(new Meta(R.integer.section3,"Maps",R.drawable.ic_map));
+        m_sMehData.add(new Meta(R.integer.section3,"Misc",R.drawable.ic_video));
         inflater = LayoutInflater.from(context);
     }
 
@@ -69,6 +69,7 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
         }
 
         holder.text.setText(m_sMehData.get(position).fragmentType);
+        holder.image.setImageResource(m_sMehData.get(position).imageId);
 
         return convertView;
     }
@@ -117,10 +118,12 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
     class Meta{
         long typeId;
         String fragmentType;
+        public int imageId;
 
-        public Meta(long sl,String fragmentType){
+        public Meta(long sl,String fragmentType,int imageId){
             this.typeId = sl;
             this.fragmentType = fragmentType;
+            this.imageId = imageId;
         }
     }
 }

@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +120,7 @@ public class HomeFragment extends Fragment {
         }
 
         try {
-            URL url = new URL("http://www.anime-expo.org/feed/");
+            URL url = new URL("http://fulltextrssfeed.com/www.anime-expo.org/feed/");
             new RssGrab().execute(url);
         }
         catch(MalformedURLException me){
@@ -141,10 +142,12 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void setupInnerViewElements(ViewGroup vg, View v){
-            TextView text = (TextView)v.findViewById(R.id.text_card_news_body);
+            TextView text = (TextView)v.findViewById(R.id.card_main_inner_simple_title);
 
             if(item!= null) {
-                text.setText(item.getPubDate() + " - " + Html.fromHtml(item.getDescription()));
+                text.setText(
+                        SimpleDateFormat.getDateInstance().format(item.getPubDate())
+                        + " - " + Html.fromHtml(item.getDescription()));
             }
         }
     }

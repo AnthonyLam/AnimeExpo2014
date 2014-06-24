@@ -12,6 +12,11 @@
               android:orientation="vertical"
               tools:context=".HomeScreen$PanelFragment"
     >
+    <ProgressBar
+        android:id="@+id/panel_load_bar"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        />
  
     <it.gmariotti.cardslib.library.view.CardListView
         android:id="@+id/panel_list"

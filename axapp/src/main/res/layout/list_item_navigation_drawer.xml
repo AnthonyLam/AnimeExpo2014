@@ -3,7 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="48dp">
+              android:layout_height="48dp"
+              android:showDividers="none">
 
     <ImageView
         android:id="@+id/navigation_image"

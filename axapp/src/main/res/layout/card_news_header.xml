@@ -3,11 +3,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+    >
 
     <TextView
-        android:id="@+id/text_card_news_header"
+        android:id="@+id/card_header_inner_simple_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/card.header_simple_title"/>
+        style="@style/card.header_expand_simple_title"
+        />
 </LinearLayout>

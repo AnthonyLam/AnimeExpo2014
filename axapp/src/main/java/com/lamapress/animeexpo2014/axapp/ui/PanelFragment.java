@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -61,6 +62,8 @@ public class PanelFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_panel,container,false);
+        ProgressBar progress = (ProgressBar)rootView.findViewById(R.id.panel_load_bar);
+        progress.setVisibility(View.VISIBLE);
 
         try{
             initCard();
@@ -68,7 +71,7 @@ public class PanelFragment extends Fragment {
         catch(NullPointerException npe){
             RestAdapter rest = new RestAdapter.Builder()
                     .setEndpoint(getActivity().getString(R.string.deployd_server_ip) + ":" + getActivity()
-                            .getString(R.string.deployd_server_port))
+                    .getString(R.string.deployd_server_port))
                     .build();
 
             Panel.PanelService panelService = rest.create(Panel.PanelService.class);
@@ -81,7 +84,6 @@ public class PanelFragment extends Fragment {
                                 for(int i = 0;i < panels.size();i++){
                                     panelDao.createOrUpdate(panels.get(i));
                                 }
-
                                 initCard();
                             }
                             catch(SQLException se){
@@ -95,6 +97,7 @@ public class PanelFragment extends Fragment {
                         }
                     }
             );
+            progress.setVisibility(View.GONE);
         }
 
         return rootView;

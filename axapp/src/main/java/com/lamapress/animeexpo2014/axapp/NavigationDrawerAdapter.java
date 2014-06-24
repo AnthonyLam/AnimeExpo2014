@@ -81,20 +81,12 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
         if(convertView == null){
             holder = new HeaderViewHolder();
             convertView = inflater.inflate(R.layout.list_item_header,parent,false);
-            holder.text = (TextView)convertView.findViewById(R.id.header_text);
-
             convertView.setTag(holder);
         }
         else{
             holder = (HeaderViewHolder)convertView.getTag();
         }
 
-        /*
-            Initialize section headers to blanks
-         */
-        String headerText = "";
-
-        holder.text.setText(headerText);
         return convertView;
     }
 
@@ -112,9 +104,6 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
         ImageView image;
     }
 
-    /*
-     * TODO: Move to separate core class?
-     */
     class Meta{
         long typeId;
         String fragmentType;

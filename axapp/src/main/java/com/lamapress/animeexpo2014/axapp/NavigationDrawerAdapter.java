@@ -27,13 +27,14 @@ public class NavigationDrawerAdapter extends BaseAdapter implements StickyListHe
          /*
          * TODO: WARNING: Hardcoded data here
          */
-        m_sMehData.add(new Meta(R.integer.section1,"Events",R.drawable.ic_panel));
-        m_sMehData.add(new Meta(R.integer.section2,"More Events",R.drawable.ic_panel));
-        m_sMehData.add(new Meta(R.integer.section2,"Guest of Honor",R.drawable.ic_guesthonor));
-        m_sMehData.add(new Meta(R.integer.section2,"Workshop",R.drawable.ic_workshop));
-        m_sMehData.add(new Meta(R.integer.section2,"Panel",R.drawable.ic_panel));
-        m_sMehData.add(new Meta(R.integer.section3,"Maps",R.drawable.ic_map));
-        m_sMehData.add(new Meta(R.integer.section3,"Misc",R.drawable.ic_video));
+        m_sMehData.add(new Meta(R.integer.section1,"News",R.drawable.ic_nav_news));
+        m_sMehData.add(new Meta(R.integer.section1,"Schedule",R.drawable.ic_nav_schedule));
+        m_sMehData.add(new Meta(R.integer.section1,"Map",R.drawable.ic_nav_map));
+        m_sMehData.add(new Meta(R.integer.section2,"Panels",R.drawable.ic_nav_panel));
+        m_sMehData.add(new Meta(R.integer.section2,"Exhibitors",R.drawable.ic_nav_exhibitor));
+        m_sMehData.add(new Meta(R.integer.section2,"Guests",R.drawable.ic_nav_guest));
+        m_sMehData.add(new Meta(R.integer.section3,"Info",R.drawable.ic_nav_info));
+        m_sMehData.add(new Meta(R.integer.section3,"Settings",R.drawable.ic_nav_settings));
         inflater = LayoutInflater.from(context);
     }
 

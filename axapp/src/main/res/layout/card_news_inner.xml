@@ -5,6 +5,6 @@
         android:id="@+id/card_main_inner_simple_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textColor="#FFF"
         />

@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Window;
 
 import com.lamapress.animeexpo2014.axapp.ui.HomeFragment;
 import com.lamapress.animeexpo2014.axapp.ui.PanelFragment;
+import com.lamapress.animeexpo2014.axapp.ui.TempFragment;
 
 
 public class HomeScreen extends ActionBarActivity
@@ -29,6 +31,8 @@ public class HomeScreen extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         setContentView(R.layout.activity_home_screen);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -52,8 +56,12 @@ public class HomeScreen extends ActionBarActivity
                 fragment = HomeFragment.newInstance(position + 1);
                 break;
             }
-            default:{
+            case 3:{
                 fragment = PanelFragment.newInstance(position+1);
+                break;
+            }
+            default:{
+                fragment = TempFragment.newInstance(position + 1);
             }
         }
 

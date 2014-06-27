@@ -6,8 +6,9 @@
               android:layout_height="48dp"
               android:showDividers="none">
 
-    <ImageView
+ <ImageView
         android:id="@+id/navigation_image"
+        android:paddingLeft="8dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
@@ -15,9 +16,12 @@
 
     <TextView
         android:id="@+id/navigation_text"
+        android:paddingLeft="8dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@android:color/primary_text_light"
         android:textSize="18sp"/>
+
 
 </LinearLayout>

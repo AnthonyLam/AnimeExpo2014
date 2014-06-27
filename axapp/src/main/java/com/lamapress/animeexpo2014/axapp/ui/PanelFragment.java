@@ -1,13 +1,21 @@
 package com.lamapress.animeexpo2014.axapp.ui;
 
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
+import android.media.Rating;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -17,6 +25,8 @@ import com.lamapress.animeexpo2014.axapp.sqlite_helper.DatabaseHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
@@ -62,16 +72,14 @@ public class PanelFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_panel,container,false);
-        ProgressBar progress = (ProgressBar)rootView.findViewById(R.id.panel_load_bar);
-        progress.setVisibility(View.VISIBLE);
 
         try{
             initCard();
         }
         catch(NullPointerException npe){
             RestAdapter rest = new RestAdapter.Builder()
-                    .setEndpoint(getActivity().getString(R.string.deployd_server_ip) + ":" + getActivity()
-                    .getString(R.string.deployd_server_port))
+                    .setEndpoint(getActivity().getString(R.string.deployd_server_ip) + ":" +
+                     getActivity().getString(R.string.deployd_server_port))
                     .build();
 
             Panel.PanelService panelService = rest.create(Panel.PanelService.class);
@@ -97,7 +105,6 @@ public class PanelFragment extends Fragment {
                         }
                     }
             );
-            progress.setVisibility(View.GONE);
         }
 
         return rootView;
@@ -116,7 +123,7 @@ public class PanelFragment extends Fragment {
         }
 
         for(int i = 0; i < panelList.size();i++){
-            Card card = new Card(getActivity(),R.layout.fragment_panel);
+            CardBody card = new CardBody(getActivity(),panelList.get(i));
             CardHeader header = new CardHeader(getActivity());
             header.setTitle(panelList.get(i).getM_sPanelName());
 
@@ -135,5 +142,39 @@ public class PanelFragment extends Fragment {
             dbHelper = OpenHelperManager.getHelper(getActivity(),DatabaseHelper.class);
         }
         return dbHelper;
+    }
+
+    class CardBody extends Card{
+        ImageView m_Rectangle;
+        TextView m_PanelDescription;
+        TextView m_PanelTime;
+        TextView m_PanelLocation;
+        RatingBar m_Favorited;
+
+        Panel panel;
+        GregorianCalendar date;
+
+        public CardBody(Context context, Panel panel){
+            super(context,R.layout.card_panel_inner);
+            this.panel = panel;
+        }
+
+        @Override
+        public void setupInnerViewElements(ViewGroup vg, View v){
+            m_Rectangle = (ImageView) v.findViewById(R.id.colorBorder);
+            m_PanelDescription = (TextView) v.findViewById(R.id.card_main_inner_simple_title);
+            m_PanelTime = (TextView) v.findViewById(R.id.card_time);
+            m_PanelLocation = (TextView) v.findViewById(R.id.card_panel_location);
+            m_Favorited = (RatingBar) v.findViewById(R.id.ratingBar);
+
+            m_Rectangle.setBackgroundColor(Color.rgb(255,0,0));
+
+            m_PanelDescription.setText(panel.getM_sPanelDescription());
+            date = new GregorianCalendar();
+            date.setTimeInMillis(panel.m_PanelTime);
+            m_PanelTime.setText(date.getTime().toString());
+            m_PanelLocation.setText(panel.getM_sPanelRoom());
+
+        }
     }
 }

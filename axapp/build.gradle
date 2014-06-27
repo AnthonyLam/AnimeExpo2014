@@ -1,8 +1,8 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1"
+    compileSdkVersion 20
+    buildToolsVersion "20"
 
     defaultConfig {
         applicationId "com.lamapress.animeexpo2014.axapp"
@@ -11,20 +11,32 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+
+        signingConfigs{
+            release{
+                storeFile file("D:\\Dropbox\\My Documents\\anime.keystore")
+                keyAlias "ax2014"
+
+                if(System.console() != null){
+                    storePassword System.console().readPassword("\n Enter keystore password: ")
+                    keyPassword System.console().readPassword("\n Enter key password: ")
+                }
+            }
+        }
+
+    buildTypes{
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:appcompat-v7:19.0.1'
-    compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'com.android.support:support-v4:19.+'
     compile 'com.android.support:appcompat-v7:19.+'
 
     compile 'com.google.android.gms:play-services:4.4.52'

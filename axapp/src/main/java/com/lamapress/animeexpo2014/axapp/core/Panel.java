@@ -23,8 +23,12 @@ public class Panel {
     String m_sPanelName;
 
     @DatabaseField
-    @SerializedName("date")
+    @SerializedName("dateBegin")
     public long m_PanelTime;
+
+    @DatabaseField
+    @SerializedName("dateEnd")
+    public long m_PanelEnd;
 
     @DatabaseField(useGetSet = true)
     @SerializedName("description")

@@ -14,7 +14,7 @@ android {
 
         signingConfigs{
             release{
-                storeFile file("D:\\Dropbox\\My Documents\\anime.keystore")
+                storeFile file("C:\\anime.keystore")
                 keyAlias "ax2014"
 
                 if(System.console() != null){
@@ -43,7 +43,6 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.4.0'
     compile 'com.squareup.retrofit:retrofit:1.6.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
-    compile 'com.thelamacmdr:flatui:2.0.2'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.github.gabrielemariotti.cards:library:1.7.2'
 }

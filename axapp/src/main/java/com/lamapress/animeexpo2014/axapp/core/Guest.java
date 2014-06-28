@@ -8,6 +8,10 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.http.GET;
 
 /**
  * @author Anthony Lam
@@ -17,11 +21,6 @@ import java.net.URL;
 public class Guest {
 
     // List of possible guest types
-    public enum GuestType {
-        PEOPLE,
-        GROUP,
-        COMPANY
-    }
     @DatabaseField(id=true, useGetSet = true)
     @SerializedName("name")
     String m_sName;
@@ -43,7 +42,7 @@ public class Guest {
     String m_sImageBitmap;
 
     @DatabaseField
-    public GuestType type;
+    String type;
 
     public Guest(){}
 
@@ -54,12 +53,17 @@ public class Guest {
      * @param bitmap  Bitmap name for a previously downloaded image
      * @param type    PEOPLE,GROUP or COMPANY
      */
-    public Guest(String name,String website,String wiki,String bitmap,GuestType type){
+    public Guest(String name,String website,String wiki,String bitmap,String type){
         this.m_sName = name;
         this.m_websiteURL = website;
         this.m_wikiURL = wiki;
         this.m_sImageBitmap = bitmap;
         this.type = type;
+    }
+
+    public interface GuestService{
+        @GET("/guest-collection")
+        void listItems(Callback<List<Guest>> cb);
     }
 
     public String getM_sName() {
@@ -94,11 +98,17 @@ public class Guest {
         this.m_wikiURL = m_wikiURL;
     }
 
+    public String getType(){
+        return type;
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
+
     /**
      * Sets the about to wiki fragment
      */
-
-
 
     public URL getwebsiteURL() {
         URL url;
@@ -121,7 +131,6 @@ public class Guest {
             return null;
         }
     }
-
 
     public String getM_sImageBitmap() {
         return m_sImageBitmap;

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 
+import com.lamapress.animeexpo2014.axapp.ui.GuestFragment;
 import com.lamapress.animeexpo2014.axapp.ui.HomeFragment;
 import com.lamapress.animeexpo2014.axapp.ui.PanelFragment;
 import com.lamapress.animeexpo2014.axapp.ui.TempFragment;
@@ -58,6 +59,10 @@ public class HomeScreen extends ActionBarActivity
             }
             case 3:{
                 fragment = PanelFragment.newInstance(position+1);
+                break;
+            }
+            case 5:{
+                fragment = GuestFragment.newInstance(position+1);
                 break;
             }
             default:{

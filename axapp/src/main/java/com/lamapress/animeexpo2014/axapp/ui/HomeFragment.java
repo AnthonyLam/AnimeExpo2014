@@ -66,12 +66,21 @@ public class HomeFragment extends Fragment {
         m_Dialog = new ProgressDialog(getActivity());
         initCard();
 
+
         return mainView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(m_Dialog.isShowing() ){
+            m_Dialog.dismiss();
+        }
     }
 
     public void initCard(){
@@ -133,9 +142,11 @@ public class HomeFragment extends Fragment {
                     CardArrayAdapter m_CardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
                     CardListView listView = (CardListView) getActivity().findViewById(R.id.cards_newslist);
                     listView.setAdapter(m_CardArrayAdapter);
-                    m_Dialog.dismiss();
                 }
                 catch(NullPointerException npe){
+                }
+                if(m_Dialog.isShowing()) {
+                    m_Dialog.dismiss();
                 }
             }
         }

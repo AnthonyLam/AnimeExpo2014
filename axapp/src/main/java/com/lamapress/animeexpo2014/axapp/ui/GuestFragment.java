@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -121,9 +122,11 @@ public class GuestFragment extends Fragment {
             cards.add(card);
         }
 
-        CardArrayAdapter adapter = new CardArrayAdapter(getActivity(),cards);
-        CardListView cardList = (CardListView)getActivity().findViewById(R.id.guest_list);
-        cardList.setAdapter(adapter);
+        if(getActivity() != null) {
+            CardArrayAdapter adapter = new CardArrayAdapter(getActivity(), cards);
+            CardListView cardList = (CardListView) getActivity().findViewById(R.id.guest_list);
+            cardList.setAdapter(adapter);
+        }
     }
 
     class CardBody extends Card{
@@ -148,10 +151,10 @@ public class GuestFragment extends Fragment {
 
             tvGuestName.setText(guest.getM_sName());
             tvGuestAbout.setText(guest.getM_sAbout());
-            tvGuestURL.setText(guest.getM_websiteURL() + "\n" + guest.getM_sImageBitmap());
+            tvGuestURL.setText(guest.getM_websiteURL());
 
             Picasso.with(getActivity()).load(guest.getM_sImageBitmap())
-                   .resize(200,200).centerCrop().into(ivGuestAvatar);
+                   .into(ivGuestAvatar);
         }
     }
 
@@ -159,7 +162,6 @@ public class GuestFragment extends Fragment {
         if(dbHelper == null){
             dbHelper = OpenHelperManager.getHelper(getActivity(),DatabaseHelper.class);
         }
-
         return dbHelper;
     }
 

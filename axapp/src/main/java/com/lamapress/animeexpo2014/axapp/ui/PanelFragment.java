@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -132,9 +133,11 @@ public class PanelFragment extends Fragment {
             cards.add(card);
         }
 
-        CardArrayAdapter adapter = new CardArrayAdapter(getActivity(),cards);
-        CardListView cardList = (CardListView)getActivity().findViewById(R.id.panel_list);
-        cardList.setAdapter(adapter);
+        if(getActivity() != null) {
+            CardArrayAdapter adapter = new CardArrayAdapter(getActivity(), cards);
+            CardListView cardList = (CardListView) getActivity().findViewById(R.id.panel_list);
+            cardList.setAdapter(adapter);
+        }
     }
 
     public DatabaseHelper getHelper(){
@@ -149,7 +152,7 @@ public class PanelFragment extends Fragment {
         TextView m_PanelDescription;
         TextView m_PanelTime;
         TextView m_PanelLocation;
-        RatingBar m_Favorited;
+        CheckBox m_Favorited;
 
         Panel panel;
         GregorianCalendar date;
@@ -165,7 +168,7 @@ public class PanelFragment extends Fragment {
             m_PanelDescription = (TextView) v.findViewById(R.id.card_main_inner_simple_title);
             m_PanelTime = (TextView) v.findViewById(R.id.card_time);
             m_PanelLocation = (TextView) v.findViewById(R.id.card_panel_location);
-            m_Favorited = (RatingBar) v.findViewById(R.id.ratingBar);
+            m_Favorited = (CheckBox) v.findViewById(R.id.favorited);
 
             m_Rectangle.setBackgroundColor(Color.rgb(255,0,0));
 

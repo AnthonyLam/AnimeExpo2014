@@ -117,10 +117,7 @@ public class GuestFragment extends Fragment {
 
         for(int i = 0; i < m_guestList.size();i++){
             CardBody card = new CardBody(getActivity(),m_guestList.get(i));
-            CardHeader header = new CardHeader(getActivity());
 
-            header.setTitle(m_guestList.get(i).getM_sName());
-            card.addCardHeader(header);
             cards.add(card);
         }
 
@@ -130,6 +127,7 @@ public class GuestFragment extends Fragment {
     }
 
     class CardBody extends Card{
+        TextView tvGuestName;
         TextView tvGuestAbout;
         TextView tvGuestURL;
         ImageView ivGuestAvatar;
@@ -143,10 +141,12 @@ public class GuestFragment extends Fragment {
 
         @Override
         public void setupInnerViewElements(ViewGroup vg,View v){
+            tvGuestName = (TextView) v.findViewById(R.id.text_guest_name);
             tvGuestAbout =(TextView) v.findViewById(R.id.text_guest_about);
             tvGuestURL = (TextView) v.findViewById(R.id.text_guest_url);
             ivGuestAvatar = (ImageView) v.findViewById(R.id.image_guest_avatar);
 
+            tvGuestName.setText(guest.getM_sName());
             tvGuestAbout.setText(guest.getM_sAbout());
             tvGuestURL.setText(guest.getM_websiteURL() + "\n" + guest.getM_sImageBitmap());
 

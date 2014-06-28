@@ -41,7 +41,7 @@ public class Guest {
     @SerializedName("imageurl")
     String m_sImageBitmap;
 
-    @DatabaseField
+    @DatabaseField(useGetSet = true)
     String type;
 
     public Guest(){}

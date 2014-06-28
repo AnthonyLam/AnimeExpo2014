@@ -112,11 +112,10 @@ public class HomeFragment extends Fragment {
             public void onPostExecute(List<RssItem> rssList){
 
                 for(int i = 0; i < rssList.size(); i++){
-                    CardInside card = new CardInside(getActivity());
-                    CardTitle header = new CardTitle(getActivity(),rssList.get(i));
+                    CardTitle card = new CardTitle(getActivity(),rssList.get(i));
+                    //CardTitle header = new CardTitle(getActivity(),rssList.get(i));
 
-                    header.setTitle(rssList.get(i).getTitle());
-                    card.addCardHeader(header);
+                    //header.setTitle(rssList.get(i).getTitle());
 
                     CardBody body = new CardBody(getActivity(),rssList.get(i));
                     card.addCardExpand(body);
@@ -174,7 +173,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    class CardTitle extends CardHeader{
+    class CardTitle extends Card{
         ImageView image;
         String imageURL;
 

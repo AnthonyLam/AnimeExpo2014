@@ -16,7 +16,10 @@ import com.lamapress.animeexpo2014.axapp.R;
 import com.lamapress.animeexpo2014.axapp.core.Guest;
 import com.lamapress.animeexpo2014.axapp.core.Panel;
 import com.lamapress.animeexpo2014.axapp.sqlite_helper.DatabaseHelper;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -145,7 +148,10 @@ public class GuestFragment extends Fragment {
             ivGuestAvatar = (ImageView) v.findViewById(R.id.image_guest_avatar);
 
             tvGuestAbout.setText(guest.getM_sAbout());
-            tvGuestURL.setText(guest.getM_websiteURL());
+            tvGuestURL.setText(guest.getM_websiteURL() + "\n" + guest.getM_sImageBitmap());
+
+            Picasso.with(getActivity()).load(guest.getM_sImageBitmap())
+                   .resize(200,200).centerCrop().into(ivGuestAvatar);
         }
     }
 

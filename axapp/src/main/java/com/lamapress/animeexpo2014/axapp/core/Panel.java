@@ -42,10 +42,14 @@ public class Panel {
     @SerializedName("room")
     String m_sPanelRoom;
 
+    @DatabaseField(useGetSet = true)
+    @SerializedName("favorited")
+    Boolean favorited = false;
+
 
     public Panel(){}
 
-    public Panel(String name,String description,String type,String room){
+    public Panel(String name,String description,String type,String room) {
         this.m_sPanelName = name;
         this.m_sPanelDescription = description;
         this.m_sPanelType = type;
@@ -67,6 +71,14 @@ public class Panel {
      * Get methods
      *
      */
+
+    public Boolean getFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(Boolean favorited) {
+        this.favorited = favorited;
+    }
 
     public String getM_sPanelName() {
         return m_sPanelName;

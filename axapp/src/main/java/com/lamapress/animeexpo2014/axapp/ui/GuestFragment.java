@@ -35,7 +35,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Anthony on 6/26/2014.
+ *
  */
 public class GuestFragment extends Fragment {
 

@@ -125,11 +125,6 @@ public class PanelFragment extends Fragment {
 
         for(int i = 0; i < panelList.size();i++){
             CardBody card = new CardBody(getActivity(),panelList.get(i));
-            CardHeader header = new CardHeader(getActivity());
-            header.setTitle(panelList.get(i).getM_sPanelName());
-
-            card.addCardHeader(header);
-
             cards.add(card);
         }
 
@@ -149,6 +144,7 @@ public class PanelFragment extends Fragment {
 
     class CardBody extends Card{
         ImageView m_Rectangle;
+        TextView m_PanelName;
         TextView m_PanelDescription;
         TextView m_PanelTime;
         TextView m_PanelLocation;
@@ -165,6 +161,7 @@ public class PanelFragment extends Fragment {
         @Override
         public void setupInnerViewElements(ViewGroup vg, View v){
             m_Rectangle = (ImageView) v.findViewById(R.id.colorBorder);
+            m_PanelName = (TextView) v.findViewById(R.id.card_panel_name);
             m_PanelDescription = (TextView) v.findViewById(R.id.card_main_inner_simple_title);
             m_PanelTime = (TextView) v.findViewById(R.id.card_time);
             m_PanelLocation = (TextView) v.findViewById(R.id.card_panel_location);
@@ -172,6 +169,7 @@ public class PanelFragment extends Fragment {
 
             m_Rectangle.setBackgroundColor(Color.rgb(255,0,0));
 
+            m_PanelName.setText(panel.getM_sPanelName());
             m_PanelDescription.setText(panel.getM_sPanelDescription());
             date = new GregorianCalendar();
             date.setTimeInMillis(panel.m_PanelTime);

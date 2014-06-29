@@ -8,11 +8,19 @@
 
 
     <TextView
+        android:id="@+id/card_panel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        />
+
+    <TextView
         android:id="@+id/card_main_inner_simple_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/card_panel_name"
         android:padding="8dp"
-        android:layout_alignParentTop="true"
         />
 
     <TextView
@@ -20,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_main_inner_simple_title"
+        android:paddingLeft="8dp"
         />
 
     <TextView
@@ -27,23 +36,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_time"
+        android:paddingLeft="8dp"
         />
 
 
     <ImageView
         android:id="@+id/colorBorder"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:paddingRight="0dp"
         />
 
     <CheckBox
         android:id="@+id/favorited"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/colorBorder"
-        android:padding="8dp"
+        android:layout_toLeftOf="@id/colorBorder"
+        android:paddingLeft="8dp"
         />
 
 </RelativeLayout>

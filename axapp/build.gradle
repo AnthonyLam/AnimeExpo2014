@@ -14,13 +14,11 @@ android {
 
         signingConfigs{
             release{
-                storeFile file("C:\\anime.keystore")
+                storeFile file("C:\\Key\\anime.keystore")
                 keyAlias "ax2014"
 
-                if(System.console() != null){
-                    storePassword System.console().readPassword("\n Enter keystore password: ")
-                    keyPassword System.console().readPassword("\n Enter key password: ")
-                }
+                storePassword System.getenv("KEYPASSWORD")
+                keyPassword System.getenv("KEYPASSWORD")
             }
         }
 

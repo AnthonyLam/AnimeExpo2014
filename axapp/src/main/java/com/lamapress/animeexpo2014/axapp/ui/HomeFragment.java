@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment {
         }
 
         try {
-            URL url = new URL("http://fulltextrssfeed.com/www.anime-expo.org/feed/");
+            URL url = new URL("http://fulltextrssfeed.com/anime-expo.org");
             new RssGrab().execute(url);
         }
         catch(MalformedURLException me){

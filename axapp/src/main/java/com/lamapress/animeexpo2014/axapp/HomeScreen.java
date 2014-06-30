@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 
+import com.lamapress.animeexpo2014.axapp.ui.CustomMapFragment;
 import com.lamapress.animeexpo2014.axapp.ui.GuestFragment;
 import com.lamapress.animeexpo2014.axapp.ui.HomeFragment;
 import com.lamapress.animeexpo2014.axapp.ui.PanelFragment;
@@ -60,6 +61,10 @@ public class HomeScreen extends ActionBarActivity
             }
             case 1:{
                 fragment = ScheduleFragment.newInstance(position +1);
+                break;
+            }
+            case 2:{
+                fragment = CustomMapFragment.newInstance(position + 1);
                 break;
             }
             case 3:{

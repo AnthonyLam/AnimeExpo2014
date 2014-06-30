@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         View mainView = inflater.inflate(R.layout.fragment_home_activity,container,false);
 
         m_Dialog = new ProgressDialog(getActivity());
-        initCard();
+        initCard(mainView);
 
 
         return mainView;
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void initCard(){
+    public void initCard(View v){
         final ArrayList<Card> cards = new ArrayList<Card>();
 
 
@@ -122,10 +122,6 @@ public class HomeFragment extends Fragment {
 
                 for(int i = 0; i < rssList.size(); i++){
                     CardTitle card = new CardTitle(getActivity(),rssList.get(i));
-                    //CardTitle header = new CardTitle(getActivity(),rssList.get(i));
-
-                    //header.setTitle(rssList.get(i).getTitle());
-
                     CardBody body = new CardBody(getActivity(),rssList.get(i));
                     card.addCardExpand(body);
 
@@ -156,12 +152,6 @@ public class HomeFragment extends Fragment {
             new RssGrab().execute(url);
         }
         catch(MalformedURLException me){
-        }
-    }
-
-    public class CardInside extends Card{
-        public CardInside(Context context){
-            super(context);
         }
     }
 

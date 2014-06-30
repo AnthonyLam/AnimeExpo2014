@@ -75,7 +75,7 @@ public class PanelFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_panel,container,false);
 
         try{
-            initCard();
+            initCard(rootView);
         }
         catch(NullPointerException npe){
             RestAdapter rest = new RestAdapter.Builder()
@@ -93,7 +93,6 @@ public class PanelFragment extends Fragment {
                                 for(int i = 0;i < panels.size();i++){
                                     panelDao.createOrUpdate(panels.get(i));
                                 }
-                                initCard();
                             }
                             catch(SQLException se){
 
@@ -111,7 +110,7 @@ public class PanelFragment extends Fragment {
         return rootView;
     }
 
-    private void initCard(){
+    private void initCard(View v){
 
         ArrayList<Card> cards = new ArrayList<Card>();
 
@@ -130,7 +129,7 @@ public class PanelFragment extends Fragment {
 
         if(getActivity() != null) {
             CardArrayAdapter adapter = new CardArrayAdapter(getActivity(), cards);
-            CardListView cardList = (CardListView) getActivity().findViewById(R.id.panel_list);
+            CardListView cardList = (CardListView) v.findViewById(R.id.panel_list);
             cardList.setAdapter(adapter);
         }
     }

@@ -19,6 +19,10 @@ import retrofit.http.GET;
 public class Panel {
 
     @DatabaseField(id=true,useGetSet = true)
+    @SerializedName("id")
+    String id;
+
+    @DatabaseField(useGetSet = true)
     @SerializedName("name")
     String m_sPanelName;
 
@@ -71,6 +75,14 @@ public class Panel {
      * Get methods
      *
      */
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Boolean getFavorited() {
         return favorited;

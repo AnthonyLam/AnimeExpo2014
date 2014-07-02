@@ -46,11 +46,6 @@ public class Panel {
     @SerializedName("room")
     String m_sPanelRoom;
 
-    @DatabaseField(useGetSet = true)
-    @SerializedName("favorited")
-    Boolean favorited = false;
-
-
     public Panel(){}
 
     public Panel(String name,String description,String type,String room) {
@@ -82,14 +77,6 @@ public class Panel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Boolean getFavorited() {
-        return favorited;
-    }
-
-    public void setFavorited(Boolean favorited) {
-        this.favorited = favorited;
     }
 
     public String getM_sPanelName() {

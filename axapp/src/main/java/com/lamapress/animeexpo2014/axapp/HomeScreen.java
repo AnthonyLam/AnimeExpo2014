@@ -64,7 +64,7 @@ public class HomeScreen extends ActionBarActivity
                 break;
             }
             case 2:{
-                fragment = CustomMapFragment.newInstance(position + 1);
+                fragment = CustomMapFragment.newInstance(position+1);
                 break;
             }
             case 3:{

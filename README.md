@@ -1,4 +1,1 @@
-AnimeExpo2014
-=============
-
-TODO: Fill in the readme
+Dead Project has Died
